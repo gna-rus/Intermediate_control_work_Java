@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.LinkedList;
+
 public class ClassOfStore {
     private int count;
     private int num;
@@ -49,6 +51,13 @@ public class ClassOfStore {
         return "NoteBookClass{"
                 + "Name = '" + nameToy + '\''
                 + '}';
+    }
+    
+   
+    public LinkedList toLink() {
+    LinkedList<String> toLinkToyStore = new LinkedList<>();
+    toLinkToyStore.add(nameToy);
+        return toLinkToyStore;
     }
     
 
