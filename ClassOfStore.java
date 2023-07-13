@@ -13,23 +13,23 @@ public class ClassOfStore {
     this.nameToy = nameToy;
   }
   
-  public int count ()
+  public int getCount ()
   {
     return count;
   }
 
-  public void count (int count)
+  public void setCount (int count)
   {
     this.count = count;
   }
   
   
-  public int num ()
+  public int getNum ()
   {
     return num;
   }
 
-  public void num (int num)
+  public void setNum (int num)
   {
     this.num = num;
   }
@@ -46,20 +46,19 @@ public class ClassOfStore {
 
     @Override
     public String toString() {
-    //   String weightF = String.format("%.2f", weight);
-    //   String priceF = String.format("%.2f", price);
-        return "NoteBookClass{"
-                + "Name = '" + nameToy + '\''
-                + '}';
+        return ""
+                + "id = " + count
+                + " weight = " + num
+                + " Name = '" + nameToy + '\'';
     }
     
-   
+    
     public LinkedList toLink() {
     LinkedList<String> toLinkToyStore = new LinkedList<>();
+    toLinkToyStore.add(String.valueOf(count));
+    toLinkToyStore.add(String.valueOf(num));
     toLinkToyStore.add(nameToy);
+    System.out.println(toLinkToyStore);
         return toLinkToyStore;
     }
-    
-
-    
 }
