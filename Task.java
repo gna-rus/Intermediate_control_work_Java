@@ -4,44 +4,47 @@ import java.util.Scanner;
 
 public class Task
 {
-     public static HashSet GenerateHashSet(int count)
+     public static HashSet GenerateHashSet()
     {
     HashSet < Object > ObjSet = new HashSet <> ();
-    Scanner scanner = new Scanner(System.in);
     
+    int numId = 0;
     System.out.println("Введите вес выпадения: ");
+    Scanner scanner = new Scanner(System.in);
     int numWeight = scanner.nextInt();
     
     System.out.println("Введите название игрушки: ");
-    String nameToy = scanner.nextLine();
+    Scanner scanner1 = new Scanner(System.in);
+    String nameToy = scanner1.nextLine();
     
-    ClassOfStore NoteBook1 = new ClassOfStore (count++, numWeight, nameToy);
-    ObjSet.add (NoteBook1);
+    ClassOfStore toyFromStore = new ClassOfStore (numId, numWeight, nameToy);
+    ObjSet.add (toyFromStore);
+    System.out.println(toyFromStore.toLink());
+    
     return ObjSet;
     }
   
     public static void print_menu() {
         // Меню
-        System.out.println("Меню фильтрации: \n1 - По названию ноутбука;\n2 - По ОС ноутбука;");
-        System.out.println("3 - По цвету ноутбука; \n4 - Минимальным параметрам; \n5 - Очистить фильтр поиск;");
-        System.out.println("6 - Выход.");
+        System.out.println("Меню: \n1 - Новая игрушка;\n2 - Провести розыгрыш;");
+        System.out.println("3 - Выход.");
     }  
  
  
     public static void main (String[]args)
     {
     HashSet < Object > ObjSet1 = new HashSet <> ();
+    Scanner scanner = new Scanner(System.in);
     print_menu();
     int count = 0;
-    int num = 0;
+     int num = 0;
         while (true) {
             System.out.print("Введите число: ");
-            Scanner scanner = new Scanner(System.in);
             num = scanner.nextInt();
-            if (num == 6){break;}
+            if (num == 3){break;}
             switch (num) {
                 case 1:
-                    ObjSet1 = GenerateHashSet(count);
+                    ObjSet1 = GenerateHashSet();
                     continue;
             }
     
