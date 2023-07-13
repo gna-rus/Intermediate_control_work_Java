@@ -1,10 +1,11 @@
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class Task
 {
-     public static HashSet GenerateHashSet()
+     public static ClassOfStore GenerateHashSet()
     {
     HashSet < Object > ObjSet = new HashSet <> ();
     
@@ -21,13 +22,21 @@ public class Task
     ObjSet.add (toyFromStore);
     System.out.println(toyFromStore.toLink());
     
-    return ObjSet;
+    return toyFromStore;
     }
   
     public static void print_menu() {
         // Меню
-        System.out.println("Меню: \n1 - Новая игрушка;\n2 - Провести розыгрыш;");
-        System.out.println("3 - Выход.");
+        System.out.println("Меню: \n1 - Новая игрушка;\n2 - Перечень всех игрушек;");
+        System.out.println("3 - Провести розыгрыш; \n4 - Выход.");
+    }  
+    
+    
+    public static void print_all_toys(HashSet ObjSet1) {
+        LinkedList<String> toLinkToyStore = new LinkedList<>();
+        for (Object str1 : ObjSet1) {
+            System.out.println(str1.toString());
+        }
     }  
  
  
@@ -44,8 +53,10 @@ public class Task
             if (num == 3){break;}
             switch (num) {
                 case 1:
-                    ObjSet1 = GenerateHashSet();
+                    ObjSet1.add(GenerateHashSet());
                     continue;
+                case 2:
+                    print_all_toys(ObjSet1);
             }
     
     } 
