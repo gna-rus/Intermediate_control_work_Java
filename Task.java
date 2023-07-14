@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Task
 {
@@ -77,7 +78,7 @@ public class Task
     
     //////////////////////
     // функция розыгрыша приза (будет осуществляться через массив)
-    public static String make_calkulation(LinkedList ObjSet1)
+    public static void make_calkulation(LinkedList ObjSet1)
     {
         LinkedList<String> toLinkToy = new LinkedList<>();
         int lengthWeight = 0;
@@ -87,8 +88,9 @@ public class Task
         }
         String[] arrRoulette = new String[lengthWeight]; // массив-рулекта
         arrRoulette = arrFill(ObjSet1, arrRoulette); // заполняю массиву-рулетку названиями игрушек
-
-        return " ";
+        String elem = arrRandomElem(arrRoulette);
+        System.out.print(elem);
+        
     }
     
     //функция заполнения массива названиями игрушек
@@ -104,6 +106,14 @@ public class Task
             }
         }
         return arrRoulette;
+    }
+    
+    // функция извлечение случайного элемента из массива-рулетки
+    public static String arrRandomElem(String[]arrRoulette)
+    {
+        Random random = new Random();
+        int randomIndex = random.nextInt(arrRoulette.length);
+        return arrRoulette[randomIndex];
     }
  
  
