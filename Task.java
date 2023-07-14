@@ -2,14 +2,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class Task
 {
-     public static ClassOfStore GenerateHashSet()
+     public static ClassOfStore GenerateHashSet(int numId)
     {
-    HashSet < Object > ObjSet = new HashSet <> ();
-    
-    int numId = 0;
+    //String numId = Integer.toString(count);
     System.out.println("Введите вес выпадения: ");
     Scanner scanner = new Scanner(System.in);
     int numWeight = scanner.nextInt();
@@ -19,9 +18,7 @@ public class Task
     String nameToy = scanner1.nextLine();
     
     ClassOfStore toyFromStore = new ClassOfStore (numId, numWeight, nameToy);
-    ObjSet.add (toyFromStore);
-    System.out.println(toyFromStore.toLink());
-    
+    System.out.println(toyFromStore.getNum());
     return toyFromStore;
     }
   
@@ -32,20 +29,59 @@ public class Task
     }  
     
     
-    public static void print_all_toys(HashSet ObjSet1) {
-        LinkedList<String> toLinkToyStore = new LinkedList<>();
+    public static void print_all_toys(LinkedList ObjSet1) {
+        
         for (Object str1 : ObjSet1) {
             System.out.println(str1.toString());
+            System.out.println(generatorOfLink(str1.toString())); // запускается алгоритм перевода строки в LinkedLink
         }
-    }  
+    }
+    // функция генерации Link
+    public static LinkedList generatorOfLink(String Toy)
+    {
+        LinkedList<String> toLinkToyStore = new LinkedList<>();
+        toLinkToyStore.add(generatorOfElem(Toy, "id"));
+        toLinkToyStore.add(generatorOfElem(Toy, "weight"));
+        toLinkToyStore.add(generatorOfElem(Toy, "Name"));
+        return toLinkToyStore;
+    }
+    // функция поиска элемента в строке через определение индексов
+    public static String generatorOfElem(String Toy, String Elem)
+    {
+        int firstIndex = FindFirstIndexOf(Toy, Elem);
+        int finalIndex = firstIndex + Elem.length()+2;
+        String elem = FindLastIndexOf(Toy, finalIndex);
+        return elem.trim();
+    }
+    
+    // поиск первого индекса подстроки в строке
+    public static int FindFirstIndexOf(String BigStr, String SmallStr) {
+        int index = BigStr.lastIndexOf(SmallStr);
+        return index;
+    }
+    
+    // функция поиска значения параметра через индексы строки
+    public static String FindLastIndexOf(String BigStr, int StartIndex) {
+        String word = "";
+        for (int i = StartIndex + 1; i < BigStr.length(); i++) {
+
+            char char1 = BigStr.charAt(i);
+            if ((char1 != ',') & (char1 != '.')) {
+                word += char1;
+            } else {
+                break;
+            }
+        }
+        return word;
+    }
  
  
     public static void main (String[]args)
     {
-    HashSet < Object > ObjSet1 = new HashSet <> ();
+    LinkedList <ClassOfStore> ObjSet1 = new LinkedList <> ();
     Scanner scanner = new Scanner(System.in);
     print_menu();
-    int count = 0;
+    int count = 1;
      int num = 0;
         while (true) {
             System.out.print("Введите число: ");
@@ -53,7 +89,8 @@ public class Task
             if (num == 3){break;}
             switch (num) {
                 case 1:
-                    ObjSet1.add(GenerateHashSet());
+                    ObjSet1.add(GenerateHashSet(count++));
+                    System.out.println(ObjSet1);
                     continue;
                 case 2:
                     print_all_toys(ObjSet1);
