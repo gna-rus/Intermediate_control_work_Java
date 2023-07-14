@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.PriorityQueue;
 
 public class Task
 {
@@ -34,7 +35,6 @@ public class Task
         
         for (Object str1 : ObjSet1) {
             System.out.println(str1.toString());
-            //System.out.println(generatorOfLink(str1.toString())); // запускается алгоритм перевода строки в LinkedLink
         }
     }
     
@@ -117,10 +117,17 @@ public class Task
         int randomIndex = random.nextInt(arrRoulette.length);
         return arrRoulette[randomIndex];
     }
+    
+    
+    public static void work_with_PriorityQueue(LinkedList ObjSet1)
+    {
+        
+    }
  
  
     public static void main (String[]args)
     {
+
     LinkedList <ClassOfStore> ObjSet1 = new LinkedList <> ();
     Scanner scanner = new Scanner(System.in);
     print_menu();
@@ -130,7 +137,7 @@ public class Task
             
             System.out.print("Введите число: ");
             num = scanner.nextInt();
-            if (num == 4){break;}
+            if (num == 5){break;}
             switch (num) {
                 case 1:
                     ObjSet1.add(GenerateHashSet(count++));
@@ -140,6 +147,9 @@ public class Task
                     continue;
                 case 3:
                     make_calkulation(ObjSet1);
+                    continue;
+                case 4:
+                    work_with_PriorityQueue(ObjSet1);
                     continue;
                 
             }
