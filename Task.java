@@ -85,9 +85,25 @@ public class Task
             toLinkToy = generatorOfLink(str1.toString()); // запускается алгоритм перевода строки в LinkedLink
             lengthWeight += Integer.parseInt(toLinkToy.get(1));
         }
-        String arrRoulette[] = new String[lengthWeight]; // массив-рулекта
-        System.out.println(lengthWeight);
+        String[] arrRoulette = new String[lengthWeight]; // массив-рулекта
+        arrRoulette = arrFill(ObjSet1, arrRoulette); // заполняю массиву-рулетку названиями игрушек
+
         return " ";
+    }
+    
+    //функция заполнения массива названиями игрушек
+    public static String[] arrFill(LinkedList ObjSet1, String[]arrRoulette)
+    {
+        int count = 0;
+        LinkedList<String> toLinkToy = new LinkedList<>();
+        for (Object str1 : ObjSet1){
+            toLinkToy = generatorOfLink(str1.toString());
+            for (int i = 0; i < Integer.parseInt(toLinkToy.get(1)); i++){
+                arrRoulette[count] = toLinkToy.get(2);
+                count++;
+            }
+        }
+        return arrRoulette;
     }
  
  
