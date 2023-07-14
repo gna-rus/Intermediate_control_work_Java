@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class Task
 {
+    // Фунция заполнения Класса
      public static ClassOfStore GenerateHashSet(int numId)
     {
-    //String numId = Integer.toString(count);
     System.out.println("Введите вес выпадения: ");
     Scanner scanner = new Scanner(System.in);
     int numWeight = scanner.nextInt();
@@ -22,21 +22,22 @@ public class Task
     System.out.println(toyFromStore.getNum());
     return toyFromStore;
     }
-  
+    
+    // Меню
     public static void print_menu() {
-        // Меню
+        
         System.out.println("Меню: \n1 - Новая игрушка;\n2 - Перечень всех игрушек;");
         System.out.println("3 - Провести розыгрыш; \n4 - Выход.");
-    }  
-    
+    }
     
     public static void print_all_toys(LinkedList ObjSet1) {
         
         for (Object str1 : ObjSet1) {
             System.out.println(str1.toString());
-            System.out.println(generatorOfLink(str1.toString())); // запускается алгоритм перевода строки в LinkedLink
+            //System.out.println(generatorOfLink(str1.toString())); // запускается алгоритм перевода строки в LinkedLink
         }
     }
+    
     // функция генерации Link
     public static LinkedList generatorOfLink(String Toy)
     {
@@ -46,6 +47,7 @@ public class Task
         toLinkToyStore.add(generatorOfElem(Toy, "Name"));
         return toLinkToyStore;
     }
+    
     // функция поиска элемента в строке через определение индексов
     public static String generatorOfElem(String Toy, String Elem)
     {
@@ -89,7 +91,7 @@ public class Task
         String[] arrRoulette = new String[lengthWeight]; // массив-рулекта
         arrRoulette = arrFill(ObjSet1, arrRoulette); // заполняю массиву-рулетку названиями игрушек
         String elem = arrRandomElem(arrRoulette);
-        System.out.print(elem);
+        System.out.println("Игрушка победитель: " + elem);
         
     }
     
@@ -125,18 +127,20 @@ public class Task
     int count = 1;
      int num = 0;
         while (true) {
+            
             System.out.print("Введите число: ");
             num = scanner.nextInt();
             if (num == 4){break;}
             switch (num) {
                 case 1:
                     ObjSet1.add(GenerateHashSet(count++));
-                    System.out.println(ObjSet1);
                     continue;
                 case 2:
                     print_all_toys(ObjSet1);
+                    continue;
                 case 3:
                     make_calkulation(ObjSet1);
+                    continue;
                 
             }
     
