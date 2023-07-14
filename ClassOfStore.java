@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class ClassOfStore {
+class ClassOfStore {
     private int count;
     private int num;
     private String nameToy; // название игрушки
@@ -48,17 +48,16 @@ public class ClassOfStore {
     public String toString() {
         return ""
                 + "id = " + count
-                + " weight = " + num
-                + " Name = '" + nameToy + '\'';
+                + ", weight = " + num
+                + ", Name = " + nameToy + '.';
     }
     
     
     public LinkedList toLink() {
     LinkedList<String> toLinkToyStore = new LinkedList<>();
-    toLinkToyStore.add(String.valueOf(count));
-    toLinkToyStore.add(String.valueOf(num));
+    // toLinkToyStore.add(String.valueOf(count));
+    // toLinkToyStore.add(String.valueOf(num));
     toLinkToyStore.add(nameToy);
-    System.out.println(toLinkToyStore);
-        return toLinkToyStore;
+    return toLinkToyStore;
     }
 }
