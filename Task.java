@@ -74,6 +74,21 @@ public class Task
         }
         return word;
     }
+    
+    //////////////////////
+    // функция розыгрыша приза (будет осуществляться через массив)
+    public static String make_calkulation(LinkedList ObjSet1)
+    {
+        LinkedList<String> toLinkToy = new LinkedList<>();
+        int lengthWeight = 0;
+        for (Object str1 : ObjSet1) {
+            toLinkToy = generatorOfLink(str1.toString()); // запускается алгоритм перевода строки в LinkedLink
+            lengthWeight += Integer.parseInt(toLinkToy.get(1));
+        }
+        String arrRoulette[] = new String[lengthWeight]; // массив-рулекта
+        System.out.println(lengthWeight);
+        return " ";
+    }
  
  
     public static void main (String[]args)
@@ -86,7 +101,7 @@ public class Task
         while (true) {
             System.out.print("Введите число: ");
             num = scanner.nextInt();
-            if (num == 3){break;}
+            if (num == 4){break;}
             switch (num) {
                 case 1:
                     ObjSet1.add(GenerateHashSet(count++));
@@ -94,6 +109,9 @@ public class Task
                     continue;
                 case 2:
                     print_all_toys(ObjSet1);
+                case 3:
+                    make_calkulation(ObjSet1);
+                
             }
     
     } 
