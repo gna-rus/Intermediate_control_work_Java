@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.PriorityQueue;
+import java.io.*;
 
 public class Task
 {
@@ -121,10 +122,26 @@ public class Task
     }
     
     // Функция записи результата в файл
-    public static void work_with_PriorityQueue(LinkedList ObjSet1)
+    public static void work_with_PriorityQueue(PriorityQueue ObjSet1)
     {
-        PriorityQueue<Integer> integerPriorityQueue = new PriorityQueue<>(7);
-        integerPriorityQueue.add(1);
+        for (Object elem: ObjSet1){
+            System.out.println(elem);
+        }
+        
+        try(FileWriter writer = new FileWriter("result.txt", false))
+        {
+            for (Object elem: ObjSet1){
+            // запись всей строки
+            writer.write(elem.toString()+"\n");
+            
+            writer.flush(); // очистить буфер без прерывания сессии программы
+        }
+        }
+        // если не получилось записать то выдает ошибку в консоль без прерывания сессии
+        catch(IOException ex){
+             
+            System.out.println("Error!!!\n" + ex.getMessage());
+        } 
     }
  
  
@@ -154,7 +171,7 @@ public class Task
                     continue;
                 case 4:
                     work_with_PriorityQueue(PriorityQueueResult);// передаю очередь для записи в файл
-                    continue;
+                    break;
                 
             }
     
