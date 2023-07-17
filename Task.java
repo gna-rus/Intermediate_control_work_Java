@@ -4,6 +4,7 @@ import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.PriorityQueue;
 
 public class Task
 {
@@ -27,14 +28,14 @@ public class Task
     public static void print_menu() {
         
         System.out.println("Меню: \n1 - Новая игрушка;\n2 - Перечень всех игрушек;");
-        System.out.println("3 - Провести розыгрыш; \n4 - Выход.");
+        System.out.println("3 - Провести розыгрыш; \n4 - Запись в файл результатов;");
+        System.out.println("5 - Выход.");
     }
     
     public static void print_all_toys(LinkedList ObjSet1) {
         
         for (Object str1 : ObjSet1) {
             System.out.println(str1.toString());
-            //System.out.println(generatorOfLink(str1.toString())); // запускается алгоритм перевода строки в LinkedLink
         }
     }
     
@@ -80,7 +81,7 @@ public class Task
     
     //////////////////////
     // функция розыгрыша приза (будет осуществляться через массив)
-    public static void make_calkulation(LinkedList ObjSet1)
+    public static String make_calkulation(LinkedList ObjSet1)
     {
         LinkedList<String> toLinkToy = new LinkedList<>();
         int lengthWeight = 0;
@@ -92,6 +93,7 @@ public class Task
         arrRoulette = arrFill(ObjSet1, arrRoulette); // заполняю массиву-рулетку названиями игрушек
         String elem = arrRandomElem(arrRoulette);
         System.out.println("Игрушка победитель: " + elem);
+        return elem;
         
     }
     
@@ -117,11 +119,20 @@ public class Task
         int randomIndex = random.nextInt(arrRoulette.length);
         return arrRoulette[randomIndex];
     }
+    
+    // Функция записи результата в файл
+    public static void work_with_PriorityQueue(LinkedList ObjSet1)
+    {
+        PriorityQueue<Integer> integerPriorityQueue = new PriorityQueue<>(7);
+        integerPriorityQueue.add(1);
+    }
  
  
     public static void main (String[]args)
     {
+
     LinkedList <ClassOfStore> ObjSet1 = new LinkedList <> ();
+    PriorityQueue< String> PriorityQueueResult = new PriorityQueue<>();
     Scanner scanner = new Scanner(System.in);
     print_menu();
     int count = 1;
@@ -130,7 +141,7 @@ public class Task
             
             System.out.print("Введите число: ");
             num = scanner.nextInt();
-            if (num == 4){break;}
+            if (num == 5){break;}
             switch (num) {
                 case 1:
                     ObjSet1.add(GenerateHashSet(count++));
@@ -139,7 +150,10 @@ public class Task
                     print_all_toys(ObjSet1);
                     continue;
                 case 3:
-                    make_calkulation(ObjSet1);
+                    PriorityQueueResult.add(make_calkulation(ObjSet1));// провожу лотырею и записываю результат ф Очередь
+                    continue;
+                case 4:
+                    work_with_PriorityQueue(PriorityQueueResult);// передаю очередь для записи в файл
                     continue;
                 
             }
