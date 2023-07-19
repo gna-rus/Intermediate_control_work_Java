@@ -20,8 +20,12 @@ public class Task
     Scanner scanner1 = new Scanner(System.in);
     String nameToy = scanner1.nextLine();
     
-    ClassOfStore toyFromStore = new ClassOfStore (numId, numWeight, nameToy);
-    System.out.println(toyFromStore.getNum());
+    Random random = new Random();
+    int rndQuantityInStock = random.nextInt(12)+5;
+    System.out.printf("Количество %s на складе: %d \n", nameToy, rndQuantityInStock);
+    
+    ClassOfStore toyFromStore = new ClassOfStore (numId, numWeight, nameToy, rndQuantityInStock);
+    //System.out.println(toyFromStore.getNum());
     return toyFromStore;
     }
     
