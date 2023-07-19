@@ -34,7 +34,7 @@ public class Task
         
         System.out.println("Меню: \n1 - Новая игрушка;\n2 - Перечень всех игрушек;");
         System.out.println("3 - Провести розыгрыш; \n4 - Запись в файл результатов;");
-        System.out.println("5 - Выход.");
+        System.out.println("5 - Изменить вес игрушки; \n6 - Выход.");
     }
     
     public static void print_all_toys(LinkedList ObjSet1) {
@@ -147,6 +147,12 @@ public class Task
             System.out.println("Error!!!\n" + ex.getMessage());
         } 
     }
+    
+    // Функция изменения веса игрушки
+    public static void changeWeightToy(LinkedList ObjSet1)
+    {
+        System.out.println("Изменить вес игрушки");    
+    }
  
  
     public static void main (String[]args)
@@ -162,7 +168,7 @@ public class Task
             
             System.out.print("Введите число: ");
             num = scanner.nextInt();
-            if (num == 5){break;}
+            if (num == 6){break;}
             switch (num) {
                 case 1:
                     ObjSet1.add(GenerateHashSet(count++));
@@ -175,6 +181,9 @@ public class Task
                     continue;
                 case 4:
                     work_with_PriorityQueue(PriorityQueueResult);// передаю очередь для записи в файл
+                    continue;
+                case 5:
+                    changeWeightToy(ObjSet1);// передаю очередь для записи в файл
                     break;
                 
             }
