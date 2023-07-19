@@ -5,12 +5,14 @@ class ClassOfStore {
     private int count;
     private int num;
     private String nameToy; // название игрушки
+    private int rndQuantityInStock;
    
-   public ClassOfStore (int count, int num, String  nameToy)
+   public ClassOfStore (int count, int num, String  nameToy, int rndQuantityInStock)
   {
     this.count = count;
     this.num = num;
     this.nameToy = nameToy;
+    this.rndQuantityInStock = rndQuantityInStock;
   }
   
   public int getCount ()
@@ -43,20 +45,29 @@ class ClassOfStore {
   {
     this.nameToy = nameToy;
   }
+  
+    public int getQuantity ()
+  {
+    return rndQuantityInStock;
+  }
+
+  public void setQuantity (int rndQuantityInStock)
+  {
+    this.rndQuantityInStock = rndQuantityInStock;
+  }
 
     @Override
     public String toString() {
         return ""
                 + "id = " + count
                 + ", weight = " + num
-                + ", Name = " + nameToy + '.';
+                + ", Name = " + nameToy
+                + ", quantity_in_stock = " + rndQuantityInStock  + '.';
     }
     
     
     public LinkedList toLink() {
     LinkedList<String> toLinkToyStore = new LinkedList<>();
-    // toLinkToyStore.add(String.valueOf(count));
-    // toLinkToyStore.add(String.valueOf(num));
     toLinkToyStore.add(nameToy);
     return toLinkToyStore;
     }
