@@ -151,7 +151,11 @@ public class Task
     // Функция изменения веса игрушки
     public static void changeWeightToy(LinkedList ObjSet1)
     {
-        System.out.println("Изменить вес игрушки");    
+        System.out.println("Изменить вес игрушки");
+        for (Object elem: ObjSet1)
+        {
+            System.out.println(elem.getNum());
+        }
     }
  
  
