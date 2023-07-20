@@ -143,31 +143,52 @@ public class Task {
     }
 
     // Функция изменения веса игрушки
-    public static void changeWeightToy(LinkedList ObjSet1) {
-        
+    public static LinkedList<ClassOfStore> changeWeightToy(LinkedList ObjSet1) {
+        int count1 = 1;
         LinkedList<String> LinkToyStore = new LinkedList<>();
+        LinkedList<ClassOfStore> LinkToyStore3 = new LinkedList<>();
         Scanner scanner = new Scanner(System.in);
-        String Toy = scanner.nextLine();
-        
-        System.out.println("Изменить вес игрушки");
+        System.out.println("На складе есть следующие игрушки: ");
         for (Object elem : ObjSet1) {
             LinkToyStore = generatorOfLink(elem.toString());
-            System.out.println(LinkToyStore.get(2));
+            System.out.println(count1 +" - "+LinkToyStore.get(2));
+            count1++;
         }
+        System.out.println("Введите название игрушки, вес которой хотите изменить: ");
+        String Toy = scanner.nextLine(); // название игрушкивес которой хотим изменить
+        
+         for (Object elem : ObjSet1)
+         {
+            int count = Integer.parseInt(LinkToyStore.get(0)); // id
+            int num = Integer.parseInt(LinkToyStore.get(1)); // вес
+            String name = LinkToyStore.get(2); 
+            int Quntity = Integer.parseInt(LinkToyStore.get(3));
+            
+             if (name.equals(Toy))
+            {
+                System.out.println("Вес игрушки: " + num);
+                System.out.print("Новый вес игрушки: " );
+                num = scanner.nextInt();
+                System.out.println();
+            }
+            ClassOfStore toyFromStore = new ClassOfStore(count, num, name, Quntity);
+            LinkToyStore3.add(toyFromStore);
+         }
+        return LinkToyStore3;
+        
     }
 
     // Функция изменения количества игрушек на скоале
     public static LinkedList<ClassOfStore> changeQuantityToy(LinkedList ObjSet1, String Toy) {
         LinkedList<String> LinkToyStore = new LinkedList<>(); // генерирую коллекцию
-        LinkedList<String> LinkToyStore2 = new LinkedList<>();
-        LinkedList<ClassOfStore> LinkToyStore3 = (LinkedList<ClassOfStore>) ObjSet1.clone();
+        LinkedList<ClassOfStore> LinkToyStore3 = new LinkedList<>();
         for (Object elem : ObjSet1) {
             LinkToyStore = generatorOfLink(elem.toString());
-            System.out.print(LinkToyStore.get(2));
+            // System.out.print(LinkToyStore.get(2));
             int count = Integer.parseInt(LinkToyStore.get(0));
             int num = Integer.parseInt(LinkToyStore.get(1));
-            String name = LinkToyStore2.get(2);
-            int Quntity = Integer.parseInt(LinkToyStore2.get(3));
+            String name = LinkToyStore.get(2);
+            int Quntity = Integer.parseInt(LinkToyStore.get(3));
             
             if (name.equals(Toy))
             {
@@ -175,30 +196,17 @@ public class Task {
             }
             ClassOfStore toyFromStore = new ClassOfStore(count, num, name, Quntity);
             LinkToyStore3.add(toyFromStore);
-        }
-        return LinkToyStore3;
-
-        // for (Object elem : ObjSet1) {
-        //     boolean flag = true;
-        //     LinkToyStore = generatorOfLink(elem.toString());// делаю LinkedList каждого обьекта класса
-        //     for (String elem1 : LinkToyStore) { // в каждома обьекте класса ищу необходимое название игрушки
-        //         if (elem1.equals(Toy)) {
-        //             LinkToyStore2.add(Integer.toString(Integer.parseInt(elem1) - 1)); // изменяю количество
-        //             flag = false;
-        //         }
-        //         else {LinkToyStore2.add(elem1);}
-        //     }
-        // }
-        // создаю новый образец класса с новыми параметрами
-        // ClassOfStore toyFromStore = new ClassOfStore(Integer.parseInt(LinkToyStore2.get(0)), Integer.parseInt(LinkToyStore2.get(1)), LinkToyStore2.get(2), Integer.parseInt(LinkToyStore2.get(3)));
-    
+            }
         
+        
+        return LinkToyStore3;
     }
 
 
     public static void main(String[] args) {
 
         LinkedList<ClassOfStore> ObjSet1 = new LinkedList<>();
+        LinkedList<ClassOfStore> ObjSetDouble = new LinkedList<>();
         PriorityQueue<String> PriorityQueueResult = new PriorityQueue<>();
         Scanner scanner = new Scanner(System.in);
         
@@ -220,19 +228,24 @@ public class Task {
                     print_all_toys(ObjSet1);
                     continue;
                 case 3:
+                    ObjSetDouble = new LinkedList<>();
                     String winToy = make_calkulation(ObjSet1); // провожу лотерею и вывожу игрушку-победитель
-                    ObjSet1 = changeQuantityToy(ObjSet1, winToy);
+                    ObjSetDouble = changeQuantityToy(ObjSet1, winToy); // создаю дубликат перечня игрушек  при этом удаляю игрушку-победитель
+                    ObjSet1.clear();
+                    ObjSet1 = (LinkedList<ClassOfStore>) ObjSetDouble.clone(); // создаю новый основной перечень с учетом игрушки-победителя
                     PriorityQueueResult.add(winToy);// записываю результат в Очередь
                     continue;
                 case 4:
                     work_with_PriorityQueue(PriorityQueueResult);// передаю очередь для записи в файл
                     continue;
                 case 5:
-                    changeWeightToy(ObjSet1);// передаю очередь для записи в файл
+                    ObjSetDouble = new LinkedList<>();
+                    ObjSetDouble = changeWeightToy(ObjSet1);// передаю очередь для изменения веса
+                    ObjSet1.clear();
+                    ObjSet1 = (LinkedList<ClassOfStore>) ObjSetDouble.clone();
                     break;
 
             }
-
         }
     }
 }
