@@ -1,5 +1,3 @@
-import java.util.LinkedList;
-
 public class ClassOfStore {
     private int count;
     private int num;
@@ -56,5 +54,4 @@ public class ClassOfStore {
     }
 
 
-  
 }

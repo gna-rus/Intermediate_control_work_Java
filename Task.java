@@ -8,13 +8,14 @@ import java.util.Scanner;
 public class Task {
     // Фунция заполнения Класса
     public static ClassOfStore GenerateHashSet(int numId) {
-        System.out.println("Введите вес выпадения: ");
-        Scanner scanner = new Scanner(System.in);
-        int numWeight = scanner.nextInt();
 
         System.out.println("Введите название игрушки: ");
         Scanner scanner1 = new Scanner(System.in);
         String nameToy = scanner1.nextLine();
+
+        System.out.println("Введите вес выпадения: ");
+        Scanner scanner = new Scanner(System.in);
+        int numWeight = scanner.nextInt();
 
         Random random = new Random();
         int rndQuantityInStock = random.nextInt(12) + 5; // генератор случайного количества игрушек на складе
@@ -25,7 +26,7 @@ public class Task {
         toyFromStore.setNum(numWeight); // присваивается вес игрушки
         toyFromStore.SetNameToy(nameToy); // присваивается название игрушки
         toyFromStore.setQuantity(rndQuantityInStock); // рандомное присвоение количества игрушек на складе
-        
+
         return toyFromStore;
     }
 
@@ -33,15 +34,16 @@ public class Task {
     public static void print_menu() {
 
         System.out.println("Меню: \n1 - Новая игрушка;\n2 - Перечень всех игрушек;");
-        System.out.println("3 - Провести розыгрыш; \n4 - Запись в файл результатов;");
-        System.out.println("5 - Изменить вес игрушки; \n6 - Выход.");
+        System.out.println("3 - Провести розыгрыш; \n4 - Провести розыгрыш (10 раз);");
+        System.out.println("5 - Запись в файл результатов; \n6 - Изменить вес игрушки;");
+        System.out.println("7 - Выход.");
     }
-    
+
     // функция создания рамоски
-    public static void frame(){
+    public static void frame() {
         System.out.println("########################");
     }
-    
+
     // функция вывода на консоль всех игрушек и их параметров
     public static void print_all_toys(LinkedList ObjSet1) {
 
@@ -128,6 +130,7 @@ public class Task {
 
     // Функция записи результата в файл
     public static void work_with_PriorityQueue(PriorityQueue ObjSet1) {
+        int count = 1;
         for (Object elem : ObjSet1) {
             System.out.println(elem);
         }
@@ -135,7 +138,8 @@ public class Task {
         try (FileWriter writer = new FileWriter("result.txt", false)) {
             for (Object elem : ObjSet1) {
                 // запись всей строки
-                writer.write(elem.toString() + "\n");
+                writer.write(count + ": " + elem.toString() + "\n");
+                count++;
 
                 writer.flush(); // очистить буфер без прерывания сессии программы
             }
@@ -156,30 +160,28 @@ public class Task {
         System.out.println("На складе есть следующие игрушки: ");
         for (Object elem : ObjSet1) {
             LinkToyStore = generatorOfLink(elem.toString());
-            System.out.println(count1 +" - "+LinkToyStore.get(2));
+            System.out.println(count1 + " - " + LinkToyStore.get(2));
             count1++;
         }
         System.out.println("Введите название игрушки, вес которой хотите изменить: ");
         String Toy = scanner.nextLine(); // название игрушкивес которой хотим изменить
-        
-         for (Object elem : ObjSet1)
-         {
+
+        for (Object elem : ObjSet1) {
             LinkToyStore = generatorOfLink(elem.toString());
             int count = Integer.parseInt(LinkToyStore.get(0)); // id
             int num = Integer.parseInt(LinkToyStore.get(1)); // вес
             String name = LinkToyStore.get(2); // имя
             int Quntity = Integer.parseInt(LinkToyStore.get(3)); // кол-во на складе
-            
-             if (name.equals(Toy))
-            {
+
+            if (name.equals(Toy)) {
                 System.out.println("Вес игрушки: " + num);
-                System.out.print("Новый вес игрушки: " );
+                System.out.print("Новый вес игрушки: ");
                 num = scanner.nextInt();
                 System.out.println();
             }
             ClassOfStore toyFromStore = new ClassOfStore(count, num, name, Quntity);
             LinkToyStore3.add(toyFromStore);
-         }
+        }
         return LinkToyStore3;
     }
 
@@ -194,14 +196,13 @@ public class Task {
             int num = Integer.parseInt(LinkToyStore.get(1));
             String name = LinkToyStore.get(2);
             int Quntity = Integer.parseInt(LinkToyStore.get(3));
-            
-            if (name.equals(Toy))
-            {
+
+            if (name.equals(Toy)) {
                 Quntity = Quntity - 1;
             }
             ClassOfStore toyFromStore = new ClassOfStore(count, num, name, Quntity);
             LinkToyStore3.add(toyFromStore);
-            }
+        }
         return LinkToyStore3;
     }
 
@@ -212,16 +213,16 @@ public class Task {
         LinkedList<ClassOfStore> ObjSetDouble = new LinkedList<>();
         PriorityQueue<String> PriorityQueueResult = new PriorityQueue<>();
         Scanner scanner = new Scanner(System.in);
-        
+
         print_menu();
         frame();
         int count = 1;
         int num = 0;
         while (true) {
-            
+
             System.out.print("Введите число: ");
             num = scanner.nextInt();
-            if (num == 6) {
+            if (num == 7) {
                 break;
             }
             switch (num) {
@@ -247,10 +248,21 @@ public class Task {
                     frame();
                     continue;
                 case 4:
-                    work_with_PriorityQueue(PriorityQueueResult);// передаю очередь для записи в файл
+                    for (int i = 0; i < 10; i++) {
+                        ObjSetDouble = new LinkedList<>();
+                        String winToy1 = make_calkulation(ObjSet1); // провожу лотерею и вывожу игрушку-победитель
+                        ObjSetDouble = changeQuantityToy(ObjSet1, winToy1); // создаю дубликат перечня игрушек  при этом удаляю игрушку-победитель
+                        ObjSet1.clear();
+                        ObjSet1 = (LinkedList<ClassOfStore>) ObjSetDouble.clone(); // создаю новый основной перечень с учетом игрушки-победителя
+                        PriorityQueueResult.add(winToy1);// записываю результат в Очередь
+                    }
                     frame();
                     continue;
                 case 5:
+                    work_with_PriorityQueue(PriorityQueueResult);// передаю очередь для записи в файл
+                    frame();
+                    continue;
+                case 6:
                     ObjSetDouble = new LinkedList<>();
                     ObjSetDouble = changeWeightToy(ObjSet1);// передаю очередь для изменения веса
                     ObjSet1.clear();
