@@ -25,7 +25,7 @@ public class Task {
         toyFromStore.setNum(numWeight); // присваивается вес игрушки
         toyFromStore.SetNameToy(nameToy); // присваивается название игрушки
         toyFromStore.setQuantity(rndQuantityInStock); // рандомное присвоение количества игрушек на складе
-        //System.out.println(toyFromStore.getNum());
+        
         return toyFromStore;
     }
 
