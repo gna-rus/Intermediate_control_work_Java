@@ -56,9 +56,5 @@ public class ClassOfStore {
     }
 
 
-    public LinkedList toLink() {
-        LinkedList<String> toLinkToyStore = new LinkedList<>();
-        toLinkToyStore.add(nameToy);
-        return toLinkToyStore;
-    }
+  
 }
